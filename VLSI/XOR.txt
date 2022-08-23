@@ -1,0 +1,28 @@
+// DSCH Ver 3.0
+// 23-08-2022 23:06:32
+// D:\Microwind\VLSI\XOR.sch
+
+module XOR( A,B,out1);
+ input A,B;
+ output out1;
+ wire w2,w3,w6,w8,w9;
+ pmos #(10) pmos_1(w3,vdd,w2); // 2.0u 0.12u
+ pmos #(31) pmos_2(out1,w3,B); // 2.0u 0.12u
+ nmos #(31) nmos_3(out1,w6,w2); // 1.0u 0.12u
+ nmos #(24) nmos_4(w6,vss,A); // 1.0u 0.12u
+ pmos #(10) pmos_5(w8,vdd,A); // 2.0u 0.12u
+ pmos #(31) pmos_6(out1,w8,w9); // 2.0u 0.12u
+ nmos #(31) nmos_7(out1,w6,B); // 1.0u 0.12u
+ nmos #(24) nmos_8(w6,vss,w9); // 1.0u 0.12u
+ not #(17) inv_9(w2,A);
+ not #(17) inv_10(w9,B);
+endmodule
+
+// Simulation parameters in Verilog Format
+always
+#1000 A=~A;
+#2000 B=~B;
+
+// Simulation parameters
+// A CLK 10 10
+// B CLK 20 20

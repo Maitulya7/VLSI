@@ -1,0 +1,28 @@
+// DSCH Ver 3.0
+// 23-08-2022 23:00:47
+// D:\Microwind\VLSI\XNOR.sch
+
+module XNOR( A,B,out2);
+ input A,B;
+ output out2;
+ wire w2,w3,w4,w6,w8,;
+ pmos #(10) pmos_1(w3,vdd,w2); // 2.0u 0.12u
+ pmos #(31) pmos_2(out2,w3,w4); // 2.0u 0.12u
+ nmos #(31) nmos_3(out2,w6,w2); // 1.0u 0.12u
+ nmos #(24) nmos_4(w6,vss,A); // 1.0u 0.12u
+ pmos #(10) pmos_5(w8,vdd,A); // 2.0u 0.12u
+ pmos #(31) pmos_6(out2,w8,B); // 2.0u 0.12u
+ nmos #(31) nmos_7(out2,w6,w4); // 1.0u 0.12u
+ nmos #(24) nmos_8(w6,vss,B); // 1.0u 0.12u
+ not #(17) inv_9(w2,A);
+ not #(17) inv_10(w4,B);
+endmodule
+
+// Simulation parameters in Verilog Format
+always
+#1000 A=~A;
+#2000 B=~B;
+
+// Simulation parameters
+// A CLK 10 10
+// B CLK 20 20
